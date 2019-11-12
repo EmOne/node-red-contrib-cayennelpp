@@ -28,6 +28,7 @@ const LPP_TEMPERATURE_NAME = 'temperature';
 const LPP_RELATIVE_HUMIDITY_NAME = 'relative_humidity';
 const LPP_ACCELEROMETER_NAME = 'accelerometer';
 const LPP_BAROMETRIC_PRESSURE_NAME = 'barometric_pressure';
+const LPP_CONCENTRATION_NAME = 'concentration';
 const LPP_GYROMETER_NAME = 'gyrometer';
 const LPP_GPS_NAME = 'gps';
 
