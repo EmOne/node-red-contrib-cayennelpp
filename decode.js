@@ -14,6 +14,7 @@ const LPP_TEMPERATURE = 103;
 const LPP_RELATIVE_HUMIDITY = 104;
 const LPP_ACCELEROMETER = 113;
 const LPP_BAROMETRIC_PRESSURE = 115;
+const LPP_CONCENTRATION = 125;
 const LPP_GYROMETER = 134;
 const LPP_GPS = 136;
 
@@ -40,6 +41,7 @@ const LPP_TEMPERATURE_SIZE = 2; // 2 bytes, 0.1°C signed
 const LPP_RELATIVE_HUMIDITY_SIZE = 1; // 1 byte, 0.5% unsigned
 const LPP_ACCELEROMETER_SIZE = 6; // 2 bytes per axis, 0.001G
 const LPP_BAROMETRIC_PRESSURE_SIZE = 2; // 2 bytes 0.1 hPa Unsigned
+const LPP_CONCENTRATION_SIZE = 2; // 2 bytes 0.1 hPa Unsigned
 const LPP_GYROMETER_SIZE = 6; // 2 bytes per axis, 0.01 °/s
 const LPP_GPS_SIZE = 9; // 3 byte lon/lat 0.0001 °, 3 bytes alt 0.01 meter
 
@@ -165,6 +167,16 @@ function decodeCayenneLpp(payload) {
               value = buffer.readInt16BE(cursor) / 10.0;
               cursor += 2;
               propertyName = LPP_BAROMETRIC_PRESSURE_NAME + '_' + channel.toString();
+              result[propertyName] = value;
+            }
+            break;
+          case LPP_CONCENTRATION:
+            if (cursor + LPP_CONCENTRATION_SIZE > buffer.length) {
+              throw new Error('Invalid CayennLpp message');
+            } else {
+              value = buffer.readInt16BE(cursor) / 10.0;
+              cursor += 2;
+              propertyName = LPP_CONCENTRATION_NAME + '_' + channel.toString();
               result[propertyName] = value;
             }
             break;
